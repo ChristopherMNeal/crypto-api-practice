@@ -32,6 +32,7 @@ async function getMenu() {
 
 getMenu();
 $('#getRate').click(function() {
+  $('#currencies option:selected').val();
   makeApiCall();
 });
 
@@ -41,8 +42,6 @@ calculate between currencies
   usd -> btc
   btc -> usd
   etc
-
-all currencies in dropdowns to compare
 
 use class with static method
 use async and await function
