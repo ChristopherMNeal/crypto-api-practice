@@ -17,11 +17,23 @@ async function makeApiCall() {
   getElements(response);
 }
 
-// $(document).ready(function() {
+async function getMenu() {
+  const response = await CryptoService.getCrypto();
+  if (response) {
+    for (let i = 0; i < response.length; i++) {
+      let item = (response[i].currency);
+      let menuItem = `<option value="${i}">${item}</option>`;
+      $("#currencies").append(`${menuItem}`);
+    }
+  } else {
+    $('.showErrors').text(`There was an error: ${response}`);
+  }
+}
+
+getMenu();
 $('#getRate').click(function() {
   makeApiCall();
 });
-// });
 
 /*
 show exchange rate
