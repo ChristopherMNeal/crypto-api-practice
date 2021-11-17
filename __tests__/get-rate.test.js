@@ -17,7 +17,13 @@ describe('CalculateRate', ()=> {
   test('it should convert us dollars to euros', ()=> {
     const newCalulateRate = new CalculateRate(1.13199004, "EUR");
     const outcome = newCalulateRate.calculateRate(5);
-    expect(outcome).toEqual(4.42);
+    expect(outcome).toEqual(4.416999994);
+  });
+
+  test('it should calculate current price as percent of all time high', ()=> {
+    const newCalulateRate = new CalculateRate(1.1, "EUR", 1.5);
+    const outcome = newCalulateRate.calculatePercent();
+    expect(outcome).toEqual(73.33);
   });
 });
 

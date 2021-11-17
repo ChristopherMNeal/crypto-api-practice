@@ -5,13 +5,18 @@ import './css/styles.css';
 import CryptoService from './js/crypto-service';
 import CalculateRate from './js/get-rate';
 
+function getSelectionClass(response, currencyIndex) {
+  return new CalculateRate(response[currencyIndex].price, response[currencyIndex],response[currencyIndex].high, response[currencyIndex].id, response[currencyIndex].rank, response[currencyIndex]["1d"].volume, response[currencyIndex].logo_url);
+}
+
 function getElements(response) {
   if (response) {
     const currencyIndex = $('#currencies option:selected').val();
-    const selectedCurrency = new CalculateRate(response[currencyIndex].price, response[currencyIndex].name);
+    const selectedCurrency = getSelectionClass(response, currencyIndex);
     const usdAmount = $("#usdInputForm").val();
     const convertedAmount = selectedCurrency.calculateRate(usdAmount);
-    $('.showRate').html(`The rate is ${selectedCurrency.exchange} ${selectedCurrency.currencies} to 1 USD<br>$ ${usdAmount} USD = ${convertedAmount} in ${selectedCurrency.currencies}`);
+    $('.showRate').html(`The rate is ${selectedCurrency.exchange} ${selectedCurrency.id} to 1 USD<br>$ ${usdAmount} USD = ${convertedAmount} in <img src= "${selectedCurrency.logo}" width= "30
+    ">${selectedCurrency.id} <br>This is the rank of the crypto> ${selectedCurrency.rank}`); 
   } else {
     $('.showErrors').text(`There was an error: ${response}`);
   }
@@ -42,3 +47,5 @@ $('#getRate').click(function() {
 
   makeApiCall();
 });
+
+
