@@ -1,7 +1,7 @@
 export default class CryptoService {
   static async getCrypto() {
     try {
-      const response = await fetch(`https://api.nomics.com/v1/exchange-rates?key=${process.env.API_KEY}`);
+      const response = await fetch(`https://api.nomics.com/v1/currencies/ticker?interval=1d,30d&per-page=100&page=1&key=${process.env.API_KEY}`);
       if (!response.ok) {
         throw Error(response.statusText);
       }

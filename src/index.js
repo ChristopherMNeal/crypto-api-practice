@@ -8,7 +8,7 @@ import CalculateRate from './js/get-rate';
 function getElements(response) {
   if (response) {
     const currencyIndex = $('#currencies option:selected').val();
-    const selectedCurrency = new CalculateRate(response[currencyIndex].rate, response[currencyIndex].currency);
+    const selectedCurrency = new CalculateRate(response[currencyIndex].price, response[currencyIndex].name);
     const usdAmount = $("#usdInputForm").val();
     const convertedAmount = selectedCurrency.calculateRate(usdAmount);
     $('.showRate').html(`The rate is ${selectedCurrency.exchange} ${selectedCurrency.currencies} to 1 USD<br>$ ${usdAmount} USD = ${convertedAmount} in ${selectedCurrency.currencies}`);
@@ -26,7 +26,7 @@ async function getMenu() {
   const response = await CryptoService.getCrypto();
   if (response) {
     for (let i = 0; i < response.length; i++) {
-      let item = (response[i].currency);
+      let item = (response[i].name);
       let menuItem = `<option value="${i}">${item}</option>`;
       $("#currencies").append(`${menuItem}`);
     }
