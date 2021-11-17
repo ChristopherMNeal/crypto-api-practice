@@ -5,6 +5,6 @@ export default class CalculateRate {
   }
 
   calculateRate(usdAmount){
-    return (usdAmount / this.exchange);
+    return parseFloat((usdAmount / this.exchange).toFixed(2));
   }
 }
