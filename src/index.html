@@ -1,17 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Crypto Rates</title>
+  <title>Currency Rates</title>
 </head>
 <body>
-  <h1>Get Crypto Rates</h1>
-  <select name="currencies" id="currencies">
-    
-  </select>
-  <div class="showRate">
+  <div class="form container">
+    <h1>Get Currency Exchange Rates</h1>
+    <label for="usdInputForm">How much $USD would you like to convert?</label>
+    <input id="usdInputForm" type="number" min="1" max="999999999"><br>
+    <label for="currencies">Which currency would you like to conver to?</label>
+    <select name="currencies" id="currencies">
+      </select>
+    <div class="showRate">
+    </div>
+    <div class="showErrors">
+    </div>
+    <button id="getRate" class="btn btn-success">Convert $$$</button>
   </div>
-  <div class="showErrors">
-  </div>
-  <button id="getRate">Get Rate</button>
 </body>
 </html>

@@ -3,10 +3,15 @@ import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
 import CryptoService from './js/crypto-service';
+import CalculateRate from './js/get-rate';
 
 function getElements(response) {
   if (response) {
-    $('.showRate').text(`The rate is ${response[24].rate} USD to one ${response[24].currency}`);
+    const currencyIndex = $('#currencies option:selected').val();
+    const selectedCurrency = new CalculateRate(response[currencyIndex].rate, response[currencyIndex].currency);
+    const usdAmount = $("#usdInputForm").val();
+    const convertedAmount = selectedCurrency.calculateRate(usdAmount);
+    $('.showRate').html(`The rate is ${selectedCurrency.exchange} ${selectedCurrency.currencies} to 1 USD<br>$ ${usdAmount} USD = ${convertedAmount} in ${selectedCurrency.currencies}`);
   } else {
     $('.showErrors').text(`There was an error: ${response}`);
   }
@@ -31,18 +36,9 @@ async function getMenu() {
 }
 
 getMenu();
+
 $('#getRate').click(function() {
-  $('#currencies option:selected').val();
+// let currencyIndex = $('#currencies option:selected').val();
+
   makeApiCall();
 });
-
-/*
-show exchange rate
-calculate between currencies
-  usd -> btc
-  btc -> usd
-  etc
-
-use class with static method
-use async and await function
-*/
