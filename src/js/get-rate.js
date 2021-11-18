@@ -1,5 +1,5 @@
 export default class CalculateRate {
-  constructor(exchange, currencies, high, id, rank, oneDayVolume, logo){
+  constructor(exchange, currencies, high, id, rank, oneDayVolume, logo, hightime){
     this.exchange = exchange;
     this.currencies = currencies;
     this.high = high;
@@ -7,7 +7,7 @@ export default class CalculateRate {
     this.rank = rank;
     this.oneDayVolume = oneDayVolume;
     this.logo = logo;
-
+    this.hightime = hightime;
   }
 
   calculateRate(usdAmount){

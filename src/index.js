@@ -6,7 +6,7 @@ import CryptoService from './js/crypto-service';
 import CalculateRate from './js/get-rate';
 
 function getSelectionClass(response, currencyIndex) {
-  return new CalculateRate(response[currencyIndex].price, response[currencyIndex],response[currencyIndex].high, response[currencyIndex].id, response[currencyIndex].rank, response[currencyIndex]["1d"].volume, response[currencyIndex].logo_url);
+  return new CalculateRate(response[currencyIndex].price, response[currencyIndex],response[currencyIndex].high, response[currencyIndex].id, response[currencyIndex].rank, response[currencyIndex]["1d"].volume, response[currencyIndex].logo_url, response[currencyIndex].high_timestamp);
 }
 
 function getElements(response) {
@@ -15,8 +15,8 @@ function getElements(response) {
     const selectedCurrency = getSelectionClass(response, currencyIndex);
     const usdAmount = $("#usdInputForm").val();
     const convertedAmount = selectedCurrency.calculateRate(usdAmount);
-    $('.showRate').html(`The rate is ${selectedCurrency.exchange} ${selectedCurrency.id} to 1 USD<br>$ ${usdAmount} USD = ${convertedAmount} in <img src= "${selectedCurrency.logo}" width= "30
-    ">${selectedCurrency.id} <br>This is the rank of the crypto> ${selectedCurrency.rank}`); 
+    const percentOfHigh = selectedCurrency.calculatePercent();
+    $('.showRate').html(`The rate is ${selectedCurrency.exchange} ${selectedCurrency.id} to 1 USD<br>$ ${usdAmount} USD = ${convertedAmount} in <img src= "${selectedCurrency.logo}" width= "30">${selectedCurrency.id} <br>All time high price was ${selectedCurrency.high} on ${selectedCurrency.hightime}.<br>Current price is ${percentOfHigh}% of that.<br>This is the rank of the crypto: ${selectedCurrency.rank}<br>The volume over the last day was ${selectedCurrency.oneDayVolume}`);
   } else {
     $('.showErrors').text(`There was an error: ${response}`);
   }
