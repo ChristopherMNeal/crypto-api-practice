@@ -1,4 +1,4 @@
-# __
+# _Cryptocurrency Converter_
 
 #### Created By _**Christopher Neal & Colt Thatcher**_
 
